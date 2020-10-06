@@ -1,0 +1,9 @@
+---
+- hosts: rhel
+  name: This is a RHEL patching playbook
+  tasks: 
+    - name: Upgrade all packages, excluding a list packages
+      yum:
+        name: '*'
+        state: latest
+        exclude: '{{ excluse_list }}'

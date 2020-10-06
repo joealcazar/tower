@@ -1,0 +1,8 @@
+---
+- hosts: rhel
+  name: This is a RHEL patching playbook
+  tasks: 
+    - name: Remove a list of packages
+      yum:
+        name: "{{ packages }}"
+        state: absent

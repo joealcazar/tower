@@ -1,0 +1,8 @@
+---
+- hosts: rhel
+  name: This is a RHEL patching playbook
+  tasks: 
+    - name: Update all packages
+      yum:
+        name: '*'
+        state: latest
