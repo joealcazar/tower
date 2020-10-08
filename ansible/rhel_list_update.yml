@@ -1,0 +1,17 @@
+---
+- hosts: rhel
+  name: This is a RHEL list patching playbook (*,security, available, installed,updates, repos)
+  tasks: 
+    - name:  all packages
+      yum:
+        list: '{{ packagename }}' 
+      register: yumcommandout
+
+    - name: Print errors if yum failed
+      debug:
+        msg: "yum command produced errors"
+      when: yumcommandout is not defined
+
+    - name: display yum list result
+      debug:
+        var: result
