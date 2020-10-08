@@ -14,4 +14,4 @@
 
     - name: display yum list result
       debug:
-        var: result
+        var: yumcommandout
