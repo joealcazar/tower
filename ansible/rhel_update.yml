@@ -6,12 +6,26 @@
       yum:
         name: '*'
         state: latest
-      notify: Reboot host
+      register: yumcommandout
 
-  handlers:
-   - name: Reboot host
-     reboot:
+    - name: Print errors if yum failed
+      debug:
+        msg: "yum command produced errors"
+      when: yumcommandout is not defined
+
+    - name: check to see if we need a reboot
+      command: needs-restarting -r
+      register: result
+      ignore_errors: yes
+
+    - name: display result
+      debug:
+        var: result.rc
+
+    - name: Reboot host
+      reboot:
        msg: "Rebooting after update"
        connect_timeout: 5
        reboot_timeout: 600
        test_command: id
+       when: result.rc == 1 and "{{  reboot_server }}" | bool
