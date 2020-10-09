@@ -16,7 +16,7 @@
     - name: check to see if we need a reboot
       command: needs-restarting 
       register: result
-      ignore_errors: yes
+     
 
     - name: display result
       debug:
