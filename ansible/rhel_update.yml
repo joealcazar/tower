@@ -14,7 +14,9 @@
       when: yumcommandout is not defined
 
     - name: check to see if we need a reboot
-      command: needs-restarting 
+      shell: needs-restarting 
+      failed_when: false
+      changed_when: false
       register: result
      
 
