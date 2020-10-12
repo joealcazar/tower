@@ -15,4 +15,4 @@
         connect_timeout: 5
         reboot_timeout: 600
         test_command: id
-      when: "yes" == "{{ reboot_server }}"
+      when: '{{ reboot_server }}' 
