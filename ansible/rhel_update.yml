@@ -2,32 +2,16 @@
 - hosts: rhel
   name: This is a RHEL patching playbook
   tasks: 
-#    - name: Update all packages
-#      yum:
-#        name: '*'
-#        state: latest
-#      register: yumcommandout
-
-    - name: Print errors if yum failed
-      debug:
-        msg: "yum command produced errors"
-      when: yumcommandout is not defined
-
-    - name: check to see if we need a reboot
-      shell: needs-restarting 
-      failed_when: false
-      changed_when: false
-      register: result
-     
-
-    - name: display result
-      debug:
-        var: result.rc
-
+    - name: Update all packages
+      yum:
+        name: '*'
+        state: latest
+      notify: Reboot host
+      
+  handlers:
     - name: Reboot host
       reboot:
-       msg: "Rebooting after update"
-       connect_timeout: 5
-       reboot_timeout: 600
-       test_command: id
-       when: result.rc == 1 and "{{  reboot_server }}" | bool
+        msg: "Rebooting after update"
+        connect_timeout: 5
+        reboot_timeout: 600
+        test_command: id
