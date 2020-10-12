@@ -5,6 +5,7 @@
     - name:  all packages
       yum:
         list: '{{ packagename }}' 
+      notify: Reboot host
       register: yumcommandout
 
     - name: Print errors if yum failed
@@ -15,7 +16,6 @@
     - name: display yum list result
       debug:
         var: yumcommandout
-      notify: Reboot host
 
   handlers:
     - name: Reboot host
