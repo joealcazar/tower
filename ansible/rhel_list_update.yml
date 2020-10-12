@@ -15,3 +15,12 @@
     - name: display yum list result
       debug:
         var: yumcommandout
+      notify: Reboot host
+
+  handlers:
+    - name: Reboot host
+      reboot:
+        msg: "Rebooting after update"
+        connect_timeout: 5
+        reboot_timeout: 600
+        test_command: id
