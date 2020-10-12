@@ -5,17 +5,16 @@
     - name: installing by package name 
       yum:
         list: '{{ packagename }}' 
-      notify: Reboot host
-#      register: yumcommandout
+      register: yumcommandout
 
-#    - name: Print errors if yum failed
-#      debug:
-#        msg: "yum command produced errors"
-#      when: yumcommandout is not defined
+    - name: Print errors if yum failed
+      debug:
+        msg: "yum command produced errors"
+      when: yumcommandout is not defined
 
-#    - name: display yum list result
-#      debug:
-#        var: yumcommandout
+    - name: display yum list result
+      debug:
+        var: yumcommandout
 
   handlers:
     - name: Reboot host
