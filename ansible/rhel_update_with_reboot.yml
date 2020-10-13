@@ -1,6 +1,6 @@
 ---
-- hosts:  server1
-  become: yes
+- hosts: rhel
+  name: This is a RHEL patching playbook
   tasks:
     - name: YUM Update
       yum:
