@@ -1,0 +1,20 @@
+---
+- hosts:  server1
+  become: yes
+  tasks:
+    - name: YUM Update
+      yum:
+        name:  '{{ packagename }}'
+        state: latest
+      register: yum_updates
+
+    - debug:
+        var: yum_updates.changes.updated
+
+    - name: Reboot server1
+      reboot:
+        msg: "Rebooting after update"
+        connect_timeout: 5
+        reboot_timeout: 600
+        test_command: id
+      when: yum_updates.changes.updated|flatten|select('regex', '^kernel$') is any and reboot_server 
