@@ -6,7 +6,7 @@
   tasks: 
     - name: copia archivo fuente
       copy:
-        src: sample.pl
+        src: '{{ file_plsql }}'
         dest: /home/oracle/carga.pl
         owner: oracle
         group: oinstall
