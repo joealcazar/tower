@@ -1,6 +1,7 @@
 ---
 - hosts: 192.168.1.99
   name: actualiza stored procedures en oracle
+  become: yes
  
   tasks: 
     - name: copia archivo fuente
@@ -9,7 +10,7 @@
         dest: /home/oracle/carga.pl
   
     - name: ejecuta comando
-      shell: sudo su - oracle -c "echo exit| echo @carga.pl | sqlplus / as sysdba"
+      shell: su - oracle -c "echo exit| echo @carga.pl | sqlplus / as sysdba"
       args:
         chdir: /home/oracle
         executable: /bin/bash
