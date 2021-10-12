@@ -1,5 +1,5 @@
 ---
-- hosts: rhel
+- hosts: 192.168.1.99
   name: actualiza stored procedures en oracle
   tasks: 
     - name: ejecuta comando
