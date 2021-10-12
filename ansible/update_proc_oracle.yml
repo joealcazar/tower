@@ -1,11 +1,14 @@
 ---
 - hosts: 192.168.1.99
   name: actualiza stored procedures en oracle
+  become: yes
+  become_user: oracle
   tasks: 
     - name: ejecuta comando
-      shell: su - oracle -c "echo exit| echo @sample.pl | sqlplus / as sysdba"
+      shell: echo exit| echo @sample.pl | sqlplus / as sysdba
       args:
         chdir: /home/oracle
+        executable: /bin/bash
         
     - name: Print output
       debug:
