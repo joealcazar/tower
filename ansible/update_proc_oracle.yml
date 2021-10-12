@@ -1,1 +1,12 @@
-
+---
+- hosts: rhel
+  name: actualiza stored procedures en oracle
+  tasks: 
+    - name: ejecuta comando
+      shell: su - oracle -c "echo exit| echo @sample.pl | sqlplus / as sysdba"
+      args:
+        chdir: /home/oracle
+        
+    - name: Print output
+      debug:
+        msg: "termino actualizacion"
