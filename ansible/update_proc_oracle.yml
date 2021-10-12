@@ -8,6 +8,9 @@
       copy:
         src: sample.pl
         dest: /home/oracle/carga.pl
+        owner: oracle
+        group: oinstall
+        mode: u=rw,g=r,o=r
   
     - name: ejecuta comando
       shell: su - oracle -c "echo exit| echo @carga.pl | sqlplus / as sysdba"
