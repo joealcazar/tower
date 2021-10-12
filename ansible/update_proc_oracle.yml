@@ -3,8 +3,13 @@
   name: actualiza stored procedures en oracle
  
   tasks: 
+    - name: copia archivo fuente
+      copy:
+        src: sample.pl
+        dest: /home/oracle/carga.pl
+  
     - name: ejecuta comando
-      shell: sudo su - oracle -c "echo exit| echo @sample.pl | sqlplus / as sysdba"
+      shell: sudo su - oracle -c "echo exit| echo @carga.pl | sqlplus / as sysdba"
       args:
         chdir: /home/oracle
         executable: /bin/bash
